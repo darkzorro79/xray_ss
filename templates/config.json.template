@@ -1,0 +1,85 @@
+{
+  "version": {
+    "min": "25.8.3",
+    "max": ""
+  },
+  "log": {
+    "loglevel": "info"
+  },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 443,
+      "protocol": "vless",
+      "tag": "reality-in",
+      "settings": {
+        "clients": [
+          {
+            "id": "{{UUID}}",
+            "email": "{{EMAIL}}",
+            "flow": "xtls-rprx-vision"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "docs.docker.com:443",
+          "xver": 0,
+          "serverNames": [
+            "docs.docker.com"
+          ],
+          "privateKey": "{{PRIVATE_KEY}}",
+          "minClientVer": "",
+          "maxClientVer": "",
+          "maxTimeDiff": 0,
+          "shortIds": [
+            ""
+          ]
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ]
+      }
+    },
+    {
+      "listen": "0.0.0.0",
+      "port": 8080,
+      "protocol": "shadowsocks",
+      "tag": "ss-udp",
+      "settings": {
+        "method": "2022-blake3-aes-128-gcm",
+        "password": "{{SS_PASSWORD}}",
+        "network": "tcp,udp"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "protocol": "bittorrent",
+        "outboundTag": "block"
+      }
+    ],
+    "domainStrategy": "IPIfNonMatch"
+  }
+}

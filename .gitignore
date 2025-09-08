@@ -1,0 +1,36 @@
+# Конфигурационные файлы с секретами
+xray/config.json
+keys.txt
+shadowsocks_config.txt
+shadowsocks_qr.png
+docker-compose.yml
+
+# Docker файлы
+.env
+
+# Логи
+*.log
+logs/
+
+# Временные файлы
+*.tmp
+*.temp
+
+# IDE файлы
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS файлы
+.DS_Store
+Thumbs.db
+
+# Backup файлы
+*.bak
+*.backup
+
+# Архивы
+*.tar.gz
+*.zip
+*.rar
