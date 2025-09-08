@@ -56,11 +56,11 @@ update_xray_version() {
         cp templates/docker-compose.yml.template templates/docker-compose.yml.template.bak
         cp templates/config.json.template templates/config.json.template.bak
         
-        # Обновляем docker-compose шаблон
-        sed -i "s/teddysun\/xray:$current_version/teddysun\/xray:$new_version/g" templates/docker-compose.yml.template
+        # Обновляем docker-compose шаблон (используем | как разделитель)
+        sed -i "s|teddysun/xray:$current_version|teddysun/xray:$new_version|g" templates/docker-compose.yml.template
         
         # Обновляем config.json шаблон
-        sed -i "s/\"min\": \"$current_version\"/\"min\": \"$new_version\"/g" templates/config.json.template
+        sed -i "s|\"min\": \"$current_version\"|\"min\": \"$new_version\"|g" templates/config.json.template
         
         echo -e "${GREEN}✅ Версия обновлена в шаблонах${NC}"
         echo "📋 Обновленные файлы:"

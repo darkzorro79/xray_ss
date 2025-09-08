@@ -53,11 +53,11 @@ update_xray_version() {
     if [[ "$new_version" != "$current_version" ]]; then
         echo "🔄 Обновляю версию с $current_version на $new_version..."
         
-        # Обновляем docker-compose шаблон
-        sed -i "s/teddysun\/xray:$current_version/teddysun\/xray:$new_version/g" templates/docker-compose.yml.template
+        # Обновляем docker-compose шаблон (используем | как разделитель)
+        sed -i "s|teddysun/xray:$current_version|teddysun/xray:$new_version|g" templates/docker-compose.yml.template
         
         # Обновляем config.json шаблон
-        sed -i "s/\"min\": \"$current_version\"/\"min\": \"$new_version\"/g" templates/config.json.template
+        sed -i "s|\"min\": \"$current_version\"|\"min\": \"$new_version\"|g" templates/config.json.template
         
         echo "✅ Версия обновлена в шаблонах"
         return 0
